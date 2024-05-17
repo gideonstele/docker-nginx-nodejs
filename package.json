@@ -1,0 +1,14 @@
+{
+  "name": "generate-docker-file",
+  "type": "module",
+  "scripts": {
+    "generate-docker-file": "node generate-docker-file.js"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "fs-extra": "^11.2.0"
+  },
+  "dependencies": {
+    "mustache": "^4.2.0"
+  }
+}

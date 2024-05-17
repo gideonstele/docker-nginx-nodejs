@@ -1,0 +1,9 @@
+[
+  {
+    "nodeVersion": "201",
+    "nginxVersion": "1.25.5",
+    "osName": "alpine",
+    "osVersion": "3.19",
+    "templateName": "node-nginx-alpine"
+  }
+]
