@@ -1,10 +1,11 @@
-import fs from 'fs-extra/esm';
+import { readFileSync } from 'fs';
+import { emptyDirSync, readJsonSync, outputFileSync } from 'fs-extra/esm';
 import mustache from 'mustache';
 
 const OUTPUT_DIR = './docker';
 
 const cleanDir = () => {
-  fs.emptyDirSync(OUTPUT_DIR);
+  emptyDirSync(OUTPUT_DIR);
 };
 
 const generateDockerFile = () => {
@@ -19,16 +20,15 @@ const generateDockerFile = () => {
   /**
    * @type {ConfigItem[]}
    */
-  const configs = fs.readJSONSync('./configs/mainline.json');
-  const templateList = fs.readdirSync('./templates');
+  const configs = readJsonSync('./configs/mainline.json');
 
   configs.forEach((config) => {
     const { templateName, nodeVersion, nginxVersion, osName, osVersion } = config;
 
-    const templateContent = fs.readFileSync(`./templates/${templateName}.mustache`, 'utf8');
+    const templateContent = readFileSync(`./templates/${templateName}.mustache`, 'utf8');
     const output = mustache.render(templateContent, config);
 
-    fs.outputFileSync(`${OUTPUT_DIR}/${nodeVersion}/${osName}${osVersion}/${nginxVersion}/Dockerfile`, output);
+    outputFileSync(`${OUTPUT_DIR}/${nodeVersion}/${osName}${osVersion}/${nginxVersion}/Dockerfile`, output);
   });
 };
 
